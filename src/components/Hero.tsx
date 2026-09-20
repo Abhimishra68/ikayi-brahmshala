@@ -64,22 +64,22 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuiz, onOpenDemoModal }) => {
 
             {/* Commanding Headline & Dynamic Animated Text */}
             <div className="space-y-2 w-full">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#071A2F] tracking-tight leading-[1.1] font-['Outfit']">
+              <h1 className="text-2xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#071A2F] tracking-tight leading-[1.1] font-['Outfit']">
                 Deconstruct the Axiom.
               </h1>
               
-              {/* Fixed Non-Clipping Dynamic Text Flip Container */}
-              <div className="min-h-[3.5rem] sm:min-h-[4.5rem] lg:min-h-[5.25rem] flex items-center relative py-1">
+              {/* Fixed Non-Clipping Dynamic Text Flip Container with Locked Fixed Height */}
+              <div className="h-[3.25rem] xs:h-[3.75rem] sm:h-[4.5rem] lg:h-[5.25rem] flex items-center relative py-1 overflow-hidden">
                 <span 
                   key={phraseIndex}
-                  className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] multicolor-wave-text font-['Outfit'] animate-phrase-slide block"
+                  className="text-2xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] multicolor-wave-text font-['Outfit'] animate-phrase-slide block shrink-0"
                 >
                   {DYNAMIC_PHRASES[phraseIndex]}
                 </span>
               </div>
 
               {/* Dynamic Vector Underline */}
-              <svg className="w-60 sm:w-80 h-3 text-[#D97706] opacity-90 mt-1" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-52 xs:w-60 sm:w-80 h-3 text-[#D97706] opacity-90 mt-1" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 9C50 3 150 2 298 9" stroke="url(#undergradient)" strokeWidth="4" strokeLinecap="round" />
                 <defs>
                   <linearGradient id="undergradient" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
