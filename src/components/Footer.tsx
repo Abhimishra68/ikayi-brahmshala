@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
 import { BRANCH_INFO } from '../data/coachingData';
+import ibsLogo from '../assets/ibs-logo.jpg';
 
 export const Footer: React.FC = () => {
   return (
@@ -60,7 +61,7 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-3">
               <div className="h-11 px-2.5 py-1 rounded-xl bg-[#0B1220] border border-slate-800 flex items-center justify-center shadow-xs">
                 <img 
-                  src="/ibs-logo.jpg" 
+                  src={ibsLogo} 
                   alt="Ikayi Brahmshala (IBS) Logo" 
                   className="h-8 w-auto object-contain rounded"
                 />

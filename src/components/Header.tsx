@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, CheckCircle2, GraduationCap, Menu, X, Search } from 'lucide-react';
 import { BRANCH_INFO } from '../data/coachingData';
+import ibsLogo from '../assets/ibs-logo.jpg';
 
 interface HeaderProps {
   onOpenSearch: () => void;
@@ -80,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenDemoModal })
         <a href="#" className="flex items-center gap-3 shrink-0 group">
           <div className="h-11 px-2.5 py-1 rounded-xl bg-[#071A2F] flex items-center justify-center shadow-xs border border-slate-800 group-hover:scale-[1.02] transition-transform">
             <img 
-              src="/ibs-logo.jpg" 
+              src={ibsLogo} 
               alt="Ikayi Brahmshala (IBS) Logo" 
               className="h-8 w-auto object-contain rounded"
             />
