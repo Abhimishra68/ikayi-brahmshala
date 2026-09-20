@@ -44,11 +44,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenDemoModal })
     <header className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs transition-all">
       
       {/* Top Announcement Bar */}
-      <div className="w-full bg-[#071A2F] text-white py-2 px-4 sm:px-6 lg:px-10 2xl:px-12 border-b border-slate-800">
-        <div className="max-w-[1536px] mx-auto flex flex-wrap items-center justify-between gap-2 text-xs font-medium">
+      <div className="w-full bg-[#071A2F] text-white py-1.5 sm:py-2 px-3 sm:px-6 lg:px-10 2xl:px-12 border-b border-slate-800">
+        <div className="max-w-[1536px] mx-auto flex items-center justify-between gap-2 text-[10px] sm:text-xs font-medium">
           
-          <div className="flex items-center gap-2.5 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 bg-[#D97706] px-2.5 py-0.5 rounded-full text-white font-bold tracking-wide text-[11px]">
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="inline-flex items-center gap-1.5 bg-[#D97706] px-2 sm:px-2.5 py-0.5 rounded-full text-white font-bold tracking-wide text-[10px] sm:text-[11px] shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
               Admissions Open 2026–27
             </span>
@@ -57,16 +57,16 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenDemoModal })
             </span>
           </div>
 
-          <div className="flex items-center gap-5 ml-auto text-slate-300 text-xs">
+          <div className="flex items-center gap-3 sm:gap-5 text-slate-300 text-[10px] sm:text-xs shrink-0">
             <span className="hidden md:inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               ISO 9001:2015 Accredited
             </span>
             <a
               href={`tel:${BRANCH_INFO.phonePrimary}`}
-              className="inline-flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors font-semibold"
+              className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 transition-colors font-semibold shrink-0"
             >
-              <Phone className="w-3.5 h-3.5 text-amber-400" />
+              <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" />
               <span>Toll-Free: 1800-890-IKAYI</span>
             </a>
           </div>
