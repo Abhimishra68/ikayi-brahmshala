@@ -136,14 +136,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenDemoModal })
             </kbd>
           </button>
 
-          {/* Primary Action CTA Button */}
+          {/* Primary Action CTA Button (Desktop Only to Avoid Mobile Redundancy) */}
           <button
             onClick={onOpenDemoModal}
-            className="px-2 py-1.5 xs:px-3 xs:py-2 sm:px-5 sm:py-2.5 rounded-lg sm:rounded-xl bg-[#D97706] hover:bg-[#B45309] active:scale-95 text-white font-bold text-[11px] sm:text-sm transition-all shadow-xs flex items-center gap-1 sm:gap-2"
+            className="hidden lg:flex px-5 py-2.5 rounded-xl bg-[#D97706] hover:bg-[#B45309] active:scale-95 text-white font-bold text-sm transition-all shadow-xs items-center gap-2"
           >
-            <GraduationCap className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-white shrink-0" />
-            <span className="hidden min-[420px]:inline">Book SAT Test</span>
-            <span className="inline min-[420px]:hidden">SAT</span>
+            <GraduationCap className="w-4.5 h-4.5 text-white shrink-0" />
+            <span>Book SAT Test</span>
           </button>
 
           {/* Mobile Menu Button */}
