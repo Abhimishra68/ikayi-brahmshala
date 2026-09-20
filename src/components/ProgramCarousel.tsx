@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle2, Sparkles, ArrowRight, Play, Pause } from 'lucide-react';
+import { CheckCircle2, Sparkles, ArrowRight, Play, Pause } from 'lucide-react';
 import { COURSES } from '../data/coachingData';
 import type { Course } from '../data/coachingData';
 
@@ -12,40 +12,63 @@ export const ProgramCarousel: React.FC<ProgramCarouselProps> = ({
 }) => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [isPaused, setIsPaused] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const filteredCourses = activeCategory === 'all'
     ? COURSES
     : COURSES.filter(c => c.category === activeCategory);
 
+  // Reset active index when category changes
+  useEffect(() => {
+    setActiveIndex(0);
+    if (carouselRef.current) {
+      carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+  }, [activeCategory]);
+
+  // Track active card index on scroll
+  const handleScroll = () => {
+    if (carouselRef.current && filteredCourses.length > 0) {
+      const { scrollLeft } = carouselRef.current;
+      const firstChild = carouselRef.current.children[0] as HTMLElement;
+      const cardWidth = firstChild ? firstChild.offsetWidth + 16 : 340;
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveIndex(Math.min(Math.max(index, 0), filteredCourses.length - 1));
+    }
+  };
+
   // Automatic Horizontal Smooth Auto-Scroll Loop
   useEffect(() => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      if (carouselRef.current) {
+      if (carouselRef.current && filteredCourses.length > 0) {
         const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
         // If reached end, wrap back to start smoothly
         if (scrollLeft + clientWidth >= scrollWidth - 20) {
           carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+          setActiveIndex(0);
         } else {
-          carouselRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+          const firstChild = carouselRef.current.children[0] as HTMLElement;
+          const cardWidth = firstChild ? firstChild.offsetWidth + 16 : 340;
+          carouselRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
         }
       }
-    }, 3000);
+    }, 3200);
 
     return () => clearInterval(interval);
   }, [isPaused, filteredCourses]);
 
-  const scrollLeft = () => {
+  const scrollToCard = (index: number) => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -360, behavior: 'smooth' });
-    }
-  };
-
-  const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 360, behavior: 'smooth' });
+      const firstChild = carouselRef.current.children[0] as HTMLElement;
+      const cardWidth = firstChild ? firstChild.offsetWidth + 16 : 340;
+      carouselRef.current.scrollTo({
+        left: index * cardWidth,
+        behavior: 'smooth'
+      });
+      setActiveIndex(index);
     }
   };
 
@@ -79,7 +102,7 @@ export const ProgramCarousel: React.FC<ProgramCarouselProps> = ({
       <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-[#D97706] text-xs font-bold uppercase tracking-wider mb-2 border border-amber-200">
               <Sparkles className="w-3.5 h-3.5 text-[#D97706]" />
@@ -97,31 +120,10 @@ export const ProgramCarousel: React.FC<ProgramCarouselProps> = ({
               Every cohort is strictly capped at 30 students. Swipe or hover to inspect details.
             </p>
           </div>
-
-          {/* Carousel Scroll Controls */}
-          <div className="flex items-center gap-2.5 self-start md:self-auto">
-            <span className="text-xs text-slate-500 font-medium hidden sm:inline">Auto-Scroll Carousel</span>
-            <button
-              onClick={scrollLeft}
-              aria-label="Previous Programs"
-              className="w-10 h-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-[#071A2F] flex items-center justify-center transition-all shadow-xs active:scale-95"
-              type="button"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={scrollRight}
-              aria-label="Next Programs"
-              className="w-10 h-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-[#071A2F] flex items-center justify-center transition-all shadow-xs active:scale-95"
-              type="button"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
         </div>
 
         {/* Category Filter Pills */}
-        <div className="mb-8 flex flex-wrap gap-2">
+        <div className="mb-6 flex flex-wrap gap-2">
           {[
             { id: 'all', label: 'All Cohorts' },
             { id: 'jee', label: 'IIT-JEE (Main & Adv)' },
@@ -143,6 +145,34 @@ export const ProgramCarousel: React.FC<ProgramCarouselProps> = ({
           ))}
         </div>
 
+        {/* Dynamic Carousel Dotted Pagination Bar (Placed Just Above Cards) */}
+        <div className="mb-4 flex items-center justify-between gap-4 bg-slate-50 px-4 py-2.5 rounded-xl border border-slate-200">
+          <div className="flex items-center gap-2.5">
+            <span className="text-xs font-bold text-[#071A2F] uppercase tracking-wider text-[11px]">Cohorts:</span>
+            <div className="flex items-center gap-1.5">
+              {filteredCourses.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToCard(idx)}
+                  aria-label={`Jump to program cohort card ${idx + 1}`}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    activeIndex === idx
+                      ? 'w-7 bg-[#D97706] shadow-xs ring-2 ring-amber-300/50'
+                      : 'w-2.5 bg-slate-300 hover:bg-slate-400'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="text-xs font-semibold text-slate-600 flex items-center gap-1.5">
+            <span className="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[#071A2F] font-extrabold text-[11px]">
+              {activeIndex + 1} / {filteredCourses.length}
+            </span>
+            <span className="hidden xs:inline text-slate-500 font-normal">Active</span>
+          </div>
+        </div>
+
         {/* Carousel Container with Spinning Gradient Border Cards */}
         <div 
           className="relative w-full group"
@@ -157,6 +187,7 @@ export const ProgramCarousel: React.FC<ProgramCarouselProps> = ({
 
           <div
             ref={carouselRef}
+            onScroll={handleScroll}
             className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6 pt-2 w-full scroll-smooth px-[7vw] sm:px-0"
           >
             {filteredCourses.map(course => {
