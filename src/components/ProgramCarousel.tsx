@@ -157,7 +157,7 @@ export const ProgramCarousel: React.FC<ProgramCarouselProps> = ({
 
           <div
             ref={carouselRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6 pt-2 w-full scroll-smooth"
+            className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6 pt-2 w-full scroll-smooth px-[7vw] sm:px-0"
           >
             {filteredCourses.map(course => {
               const styles = getCategoryStyles(course.category);
@@ -165,7 +165,7 @@ export const ProgramCarousel: React.FC<ProgramCarouselProps> = ({
               return (
                 <div
                   key={course.id}
-                  className="snap-start shrink-0 w-[280px] xs:w-[320px] sm:w-[350px] lg:w-[380px] xl:w-[410px] spinning-gradient-card transition-transform duration-300 hover:scale-[1.015]"
+                  className="snap-center shrink-0 w-[86vw] max-w-[340px] sm:w-[350px] lg:w-[380px] xl:w-[410px] spinning-gradient-card transition-transform duration-300 hover:scale-[1.015]"
                 >
                   <div className="spinning-gradient-card-inner">
                     
