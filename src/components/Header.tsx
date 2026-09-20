@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, CheckCircle2, GraduationCap, Menu, X, Search } from 'lucide-react';
+import { Phone, CheckCircle2, GraduationCap, Menu, X, Search, BookOpen, Calculator, Sparkles, Users, Trophy, MapPin, ChevronRight, MessageSquare } from 'lucide-react';
 import { BRANCH_INFO } from '../data/coachingData';
 import ibsLogo from '../assets/ibs-logo.jpg';
 
@@ -9,12 +9,12 @@ interface HeaderProps {
 }
 
 const NAV_ITEMS = [
-  { id: 'programs', label: 'Programs', href: '#programs' },
-  { id: 'fee-estimator', label: 'Fees & Aid', href: '#fee-estimator' },
-  { id: 'pedagogy-matrix', label: 'Pedagogy', href: '#pedagogy-matrix' },
-  { id: 'faculty-benchmarks', label: 'Faculty', href: '#faculty-benchmarks' },
-  { id: 'toppers', label: 'Results', href: '#toppers' },
-  { id: 'campuses', label: 'Campuses', href: '#campuses' }
+  { id: 'programs', label: 'Programs', href: '#programs', icon: BookOpen, desc: 'Targeted IIT-JEE & NEET Cohorts' },
+  { id: 'fee-estimator', label: 'Fees & Aid', href: '#fee-estimator', icon: Calculator, desc: 'Merit Scholarship Calculator' },
+  { id: 'pedagogy-matrix', label: 'Pedagogy', href: '#pedagogy-matrix', icon: Sparkles, desc: '1:1 Daily Remediation Clinic' },
+  { id: 'faculty-benchmarks', label: 'Faculty', href: '#faculty-benchmarks', icon: Users, desc: 'Ex-IIT & AIIMS Mentors' },
+  { id: 'toppers', label: 'Results', href: '#toppers', icon: Trophy, desc: '142+ AIR Top 100 Rankers' },
+  { id: 'campuses', label: 'Campuses', href: '#campuses', icon: MapPin, desc: 'Interactive Location Finder' }
 ];
 
 export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenDemoModal }) => {
@@ -152,51 +152,118 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenDemoModal })
             className="p-1.5 text-slate-700 hover:bg-slate-100 rounded-lg sm:rounded-xl lg:hidden"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-[#D97706]" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
 
         </div>
 
       </div>
 
-      {/* Mobile Navigation Dropdown */}
+      {/* Mobile Navigation Drawer with Dimmed Backdrop */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-6 py-5 space-y-3 shadow-xl">
-          {NAV_ITEMS.map(item => {
-            const isSelected = activeNav === item.id;
-            return (
-              <a
-                key={item.id}
-                href={item.href}
-                onClick={() => {
-                  setActiveNav(item.id);
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex items-center justify-between p-3 rounded-xl font-bold transition-all text-xs sm:text-sm ${
-                  isSelected
-                    ? 'bg-[#071A2F] text-white'
-                    : 'text-slate-800 hover:text-[#D97706] hover:bg-slate-50'
-                }`}
-              >
-                <span>{item.label}</span>
-                {isSelected && <span className="w-2 h-2 rounded-full bg-[#D97706]" />}
-              </a>
-            );
-          })}
+        <>
+          {/* Dimmed Blur Backdrop Overlay */}
+          <div 
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 top-[90px] sm:top-[110px] bg-slate-900/60 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300"
+          />
 
-          <div className="pt-3 border-t border-slate-200">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenDemoModal();
-              }}
-              className="w-full bg-[#D97706] hover:bg-[#B45309] text-white font-bold py-3 rounded-xl text-center shadow-xs flex items-center justify-center gap-2 text-xs sm:text-sm"
-            >
-              <GraduationCap className="w-4 h-4" />
-              <span>Book Free SAT Test</span>
-            </button>
+          {/* Premium Animated Drawer Panel */}
+          <div className="fixed top-[90px] sm:top-[110px] left-0 right-0 z-50 lg:hidden bg-white border-t-2 border-[#D97706] border-b border-slate-200 rounded-b-3xl shadow-2xl overflow-hidden animate-drawer-slide-down max-h-[calc(100vh-120px)] flex flex-col">
+            
+            {/* Drawer Header Badge */}
+            <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D97706] animate-pulse" />
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#071A2F]">
+                  ACADEMIC NAVIGATION MENU
+                </span>
+              </div>
+              <span className="text-[10px] font-semibold text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">
+                6 Core Sections
+              </span>
+            </div>
+
+            {/* Menu Links with Icons, Subtitles & Selection State */}
+            <div className="p-4 space-y-2 overflow-y-auto max-h-[55vh]">
+              {NAV_ITEMS.map(item => {
+                const isSelected = activeNav === item.id;
+                const Icon = item.icon;
+
+                return (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    onClick={() => {
+                      setActiveNav(item.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`flex items-center justify-between p-3.5 rounded-2xl font-bold transition-all text-xs sm:text-sm group ${
+                      isSelected
+                        ? 'bg-[#071A2F] text-white shadow-md border border-slate-800'
+                        : 'bg-slate-50 text-slate-800 border border-slate-200/80 hover:bg-amber-50/50 hover:border-amber-300/60'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+                        isSelected
+                          ? 'bg-amber-500/20 text-amber-300'
+                          : 'bg-white text-[#D97706] border border-slate-200 group-hover:border-amber-300'
+                      }`}>
+                        <Icon className="w-4.5 h-4.5" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-extrabold font-['Outfit'] text-sm">{item.label}</span>
+                          {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />}
+                        </div>
+                        <span className={`text-[10px] block font-normal ${isSelected ? 'text-slate-300' : 'text-slate-500'}`}>
+                          {item.desc}
+                        </span>
+                      </div>
+                    </div>
+
+                    <ChevronRight className={`w-4 h-4 transition-transform ${isSelected ? 'text-amber-400 translate-x-0.5' : 'text-slate-400 group-hover:translate-x-0.5'}`} />
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Drawer Footer Actions */}
+            <div className="p-4 bg-slate-50 border-t border-slate-200 space-y-2.5">
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href={`tel:${BRANCH_INFO.phonePrimary}`}
+                  className="py-2.5 px-3 rounded-xl bg-white border border-slate-300 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-slate-100"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#D97706]" />
+                  <span>Call Us</span>
+                </a>
+                <a
+                  href={`https://wa.me/${BRANCH_INFO.whatsappNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2.5 px-3 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-100"
+                >
+                  <MessageSquare className="w-3.5 h-3.5 text-[#059669]" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenDemoModal();
+                }}
+                className="w-full bg-[#D97706] hover:bg-[#B45309] active:scale-95 text-white font-bold py-3 px-4 rounded-xl text-center shadow-xs flex items-center justify-center gap-2 text-xs sm:text-sm"
+              >
+                <GraduationCap className="w-4.5 h-4.5" />
+                <span>Book Free Brahmshala SAT Test</span>
+              </button>
+            </div>
+
           </div>
-        </div>
+        </>
       )}
 
     </header>
