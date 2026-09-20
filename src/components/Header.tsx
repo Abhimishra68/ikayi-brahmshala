@@ -75,22 +75,22 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenDemoModal })
       </div>
 
       {/* Main Navigation Bar */}
-      <div className="h-20 max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-10 2xl:px-12 flex items-center justify-between gap-6">
+      <div className="h-16 sm:h-20 max-w-[1536px] mx-auto px-3 sm:px-6 lg:px-10 2xl:px-12 flex items-center justify-between gap-2 sm:gap-6">
         
         {/* Brand Logo */}
-        <a href="#" className="flex items-center gap-2 sm:gap-3 shrink-0 group">
-          <div className="h-9 sm:h-11 px-2 sm:px-2.5 py-1 rounded-xl bg-[#071A2F] flex items-center justify-center shadow-xs border border-slate-800 group-hover:scale-[1.02] transition-transform">
+        <a href="#" className="flex items-center gap-1.5 sm:gap-3 shrink-0 group">
+          <div className="h-8 sm:h-11 px-1.5 sm:px-2.5 py-1 rounded-lg sm:rounded-xl bg-[#071A2F] flex items-center justify-center shadow-xs border border-slate-800 group-hover:scale-[1.02] transition-transform shrink-0">
             <img 
               src={ibsLogo} 
               alt="Ikayi Brahmshala (IBS) Logo" 
-              className="h-6 sm:h-8 w-auto object-contain rounded"
+              className="h-5 sm:h-8 w-auto object-contain rounded"
             />
           </div>
-          <div>
-            <div className="font-extrabold text-xs xs:text-base sm:text-xl tracking-tight text-[#0F172A] leading-none mb-0.5 sm:mb-1 font-['Outfit']">
+          <div className="shrink-0">
+            <div className="font-extrabold text-[13px] xs:text-base sm:text-xl tracking-tight text-[#0F172A] leading-none mb-0.5 sm:mb-1 font-['Outfit']">
               IKAYI BRAHMSHALA
             </div>
-            <div className="text-[8px] xs:text-[9px] sm:text-[10px] text-slate-500 font-semibold tracking-wider uppercase">
+            <div className="text-[8px] sm:text-[10px] text-slate-500 font-semibold tracking-wider uppercase">
               IIT-JEE • NEET • Olympiad
             </div>
           </div>
@@ -121,12 +121,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenDemoModal })
         </nav>
 
         {/* Right Action Cluster */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-3 shrink-0">
           
           {/* Quick Search Button */}
           <button
             onClick={onOpenSearch}
-            className="p-2 sm:px-3.5 sm:py-2.5 rounded-xl text-slate-600 hover:text-[#0F172A] bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-all text-xs font-semibold flex items-center gap-2"
+            className="p-1.5 sm:px-3.5 sm:py-2.5 rounded-lg sm:rounded-xl text-slate-600 hover:text-[#0F172A] bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-all text-xs font-semibold flex items-center gap-2"
             title="Search Courses & Exam Info (Ctrl+K)"
           >
             <Search className="w-4 h-4 text-slate-500" />
@@ -139,20 +139,20 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenDemoModal })
           {/* Primary Action CTA Button */}
           <button
             onClick={onOpenDemoModal}
-            className="px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#D97706] hover:bg-[#B45309] active:scale-95 text-white font-bold text-xs sm:text-sm transition-all shadow-xs flex items-center gap-1.5 sm:gap-2"
+            className="px-2 py-1.5 xs:px-3 xs:py-2 sm:px-5 sm:py-2.5 rounded-lg sm:rounded-xl bg-[#D97706] hover:bg-[#B45309] active:scale-95 text-white font-bold text-[11px] sm:text-sm transition-all shadow-xs flex items-center gap-1 sm:gap-2"
           >
-            <GraduationCap className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-white" />
-            <span className="hidden sm:inline">Book SAT Test</span>
-            <span className="inline sm:hidden text-[11px]">SAT Test</span>
+            <GraduationCap className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-white shrink-0" />
+            <span className="hidden min-[420px]:inline">Book SAT Test</span>
+            <span className="inline min-[420px]:hidden">SAT</span>
           </button>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-slate-700 hover:bg-slate-100 rounded-xl lg:hidden"
+            className="p-1.5 text-slate-700 hover:bg-slate-100 rounded-lg sm:rounded-xl lg:hidden"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
 
         </div>

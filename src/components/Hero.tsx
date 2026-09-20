@@ -97,20 +97,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuiz, onOpenDemoModal }) => {
             </p>
 
             {/* Dual CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto pt-2">
+            <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-3 w-full sm:w-auto pt-2">
               <button
                 onClick={() => onOpenDemoModal()}
-                className="btn-primary-gold inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm sm:text-base shadow-xs"
+                className="btn-primary-gold inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-base shadow-xs"
               >
                 <span>Apply for Brahmshala SAT (Free Test)</span>
-                <ArrowRight className="w-4.5 h-4.5" />
+                <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 shrink-0" />
               </button>
 
               <button
                 onClick={onOpenQuiz}
-                className="btn-secondary-white inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base shadow-xs"
+                className="btn-secondary-white inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-base shadow-xs"
               >
-                <Sparkles className="w-4 h-4 text-[#D97706]" />
+                <Sparkles className="w-4 h-4 text-[#D97706] shrink-0" />
                 <span>Course Matcher Quiz</span>
               </button>
             </div>
