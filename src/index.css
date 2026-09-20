@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary-navy: #071A2F;
+    --deep-ink: #0B1220;
+    --academic-blue: #1D4ED8;
+    --scholarship-gold: #D97706;
+    --soft-amber: #F59E0B;
+    --success-emerald: #059669;
+    --bg-slate: #F8FAFC;
+    --surface-white: #FFFFFF;
+    --muted-border: #E2E8F0;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+  }
+  
+  html, body, #root {
+    max-width: 100%;
+    overflow-x: hidden !important;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-slate);
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Academic Mesh Animated Background */
+.academic-mesh-bg {
+  background-color: #F8FAFC;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(217, 119, 6, 0.05) 0px, transparent 50%),
+    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+}
+
+/* Subtle moving glow gradients */
+@keyframes ambient-glow {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(15px, -15px) scale(1.08);
+    opacity: 0.85;
+  }
+}
+
+@keyframes hero-phrase-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes multicolor-wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Ring / Vibration Shake Animation (Triggers every 3 sec) */
+@keyframes ring-vibrate-shake {
+  0%, 75%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  78% {
+    transform: rotate(14deg) scale(1.15);
+  }
+  81% {
+    transform: rotate(-14deg) scale(1.15);
+  }
+  84% {
+    transform: rotate(10deg) scale(1.12);
+  }
+  87% {
+    transform: rotate(-10deg) scale(1.12);
+  }
+  90% {
+    transform: rotate(5deg) scale(1.05);
+  }
+  93% {
+    transform: rotate(-5deg) scale(1.05);
+  }
+  96% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* Radar Pulse Wave Expansion */
+@keyframes radar-wave-expand {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.animate-ambient-glow {
+  animation: ambient-glow 10s ease-in-out infinite;
+}
+
+.animate-phrase-slide {
+  animation: hero-phrase-fade 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.multicolor-wave-text {
+  background: linear-gradient(
+    90deg,
+    #D97706 0%,
+    #F59E0B 18%,
+    #EA580C 32%,
+    #E11D48 48%,
+    #7C3AED 64%,
+    #2563EB 80%,
+    #D97706 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: multicolor-wave 3.5s linear infinite;
+}
+
+.animate-ring-shake {
+  animation: ring-vibrate-shake 3s ease-in-out infinite;
+}
+
+.animate-ring-shake-delay-1 {
+  animation: ring-vibrate-shake 3s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+
+.animate-ring-shake-delay-2 {
+  animation: ring-vibrate-shake 3s ease-in-out infinite;
+  animation-delay: 1.6s;
+}
+
+.animate-radar-wave {
+  animation: radar-wave-expand 3s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.animate-radar-wave-delay-1 {
+  animation: radar-wave-expand 3s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation-delay: 0.8s;
+}
+
+.animate-radar-wave-delay-2 {
+  animation: radar-wave-expand 3s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation-delay: 1.6s;
+}
+
+/* Button & Card Utilities */
+.btn-primary-navy {
+  background-color: var(--primary-navy);
+  color: #FFFFFF;
+  transition: all 0.2s ease;
+}
+.btn-primary-navy:hover {
+  background-color: var(--deep-ink);
+  transform: translateY(-1px);
+}
+
+.btn-primary-gold {
+  background-color: var(--scholarship-gold);
+  color: #FFFFFF;
+  transition: all 0.2s ease;
+}
+.btn-primary-gold:hover {
+  background-color: #B45309;
+  transform: translateY(-1px);
+}
+
+.btn-secondary-white {
+  background-color: #FFFFFF;
+  color: var(--primary-navy);
+  border: 1px solid var(--muted-border);
+  transition: all 0.2s ease;
+}
+.btn-secondary-white:hover {
+  border-color: var(--primary-navy);
+  background-color: #F8FAFC;
+}
+
+/* Card radius & shadow standard */
+.academic-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--muted-border);
+  border-radius: 1rem; /* 16px */
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s ease;
+}
+
+.academic-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+}
+
+.academic-card-dark {
+  background-color: var(--primary-navy);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  color: #FFFFFF;
+}
+
+/* Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ambient-glow,
+  .animate-phrase-slide,
+  .multicolor-wave-text,
+  .animate-ring-shake,
+  .animate-ring-shake-delay-1,
+  .animate-ring-shake-delay-2,
+  .animate-radar-wave,
+  .animate-radar-wave-delay-1,
+  .animate-radar-wave-delay-2,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Custom scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
