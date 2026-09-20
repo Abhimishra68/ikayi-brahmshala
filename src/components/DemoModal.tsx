@@ -31,30 +31,30 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, preSelect
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/75 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/75 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[92vh]">
         
         {/* Header */}
-        <div className="bg-[#071A2F] text-white p-6 relative">
+        <div className="bg-[#071A2F] text-white p-4 sm:p-6 relative shrink-0">
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="absolute top-4 right-4 p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
           
           <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">
-            <GraduationCap className="w-4 h-4 text-amber-400" />
+            <GraduationCap className="w-4 h-4 text-amber-400 shrink-0" />
             <span>Admission & Free Demo Booking</span>
           </div>
-          <h2 className="text-xl font-bold font-['Outfit']">Book Free Demo & Scholarship Seat</h2>
-          <p className="text-xs text-slate-300 mt-1 font-normal">
+          <h2 className="text-lg sm:text-xl font-bold font-['Outfit']">Book Free Demo & Scholarship Seat</h2>
+          <p className="text-xs text-slate-300 mt-0.5 font-normal">
             Experience 3 days of live classroom lectures with IITian faculty before finalizing admission.
           </p>
         </div>
 
-        {/* Form Body */}
-        <div className="p-6">
+        {/* Form Body with Scrollbar */}
+        <div className="p-4 sm:p-6 overflow-y-auto">
           {submitted ? (
             <div className="py-8 text-center space-y-3">
               <CheckCircle2 className="w-12 h-12 text-[#059669] mx-auto" />
